@@ -110,17 +110,13 @@ Now that we have the HTML and CSS set up, you can make scripts.js and we'll cont
 
 To start of we need to link the endpoint to the right direction to get the right set of JSON back from Microsoft Azure.
 
+> **Note that the code won't work if you don't put your own subscription key.** You can get a subscription key right [here](https://linktomicrosoft.com/ "Link to Microsoft Azure to get a subscription key").
+
 ```javascript
 var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
 var endpoint = "https://westeurope.api.cognitive.microsoft.com/";
 var uriBase = endpoint + "vision/v2.0/analyze";
 var webcamStream;
-```
-
-> **Note that the code won't work if you don't put your own subscription key**
-
-```javascript
-var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
 ```
 
 For this next step we're going to request the right set of the JSON we get back from Microsoft.
