@@ -161,8 +161,8 @@ Now we're going to insert the content in the HTML element that we gave an ID nam
 document.querySelector('#responseArea').textContent = stringLBtrimmed;
 ```
 To complete the final two lines of the tutorial we're going to give the HTML element `audio` its rigthful `src`. Still using the same `var` we used to display the name of the animal in the `#responseArea`.
-First we're going to select `audio` by using `document.getElementById("sourceAudio")`. Now that the audio element is saved in 'var sourceAudio' we can give 'sourceAudio' the source `'./audio/' + stringLBtrimmed + '1.wav'`. Which translates to `'./audio/animalName1.wav'`.
-``
+First we're going to select `audio` by using `document.getElementById("sourceAudio")`. Now that the audio element is saved in `var sourceAudio` we can give `sourceAudio` the source `'./audio/' + stringLBtrimmed + '1.wav'`. Which translates to `'./audio/animalName1.wav'`.
+
 > **Make sure to [download the animal sounds](https://www.google.com "Location of sound files on our Github") from our Github repository.**
 > It's also possible to download animal sounds yourself. Just make sure the sound file is a '.wav' and its named right. For instance 'giraffe1.wav'.
 
