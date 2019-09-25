@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0.5em;
+    max-width: 40em;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 1.75em;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+
+h3 {
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+strong {
+    font-weight: 500;
+}
+
+/*
+#wrapper {
+    width: 1020px;
+    display: table;
+}
+
+#jsonOutput {
+    width: 600px;
+    display: table-cell;
+}
+
+#imageDiv {
+    width: 420px;
+    display: table-cell;
+}
+
+#audioDiv {
+    width: 420px;
+    display: table-cell;
+}
+*/
+
+#imageDiv img {
+    width: 100%;
+}
