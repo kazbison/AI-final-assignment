@@ -108,13 +108,86 @@ Now that we have the HTML and CSS set up, you can make scripts.js and we'll cont
 
 ## script.js
 
-> Note that the **code won't work if you don't put your own subscription key**
+To start of we need to link the endpoint to the right direction to get the right set of JSON back from Microsoft Azure.
+
+```javascript
+var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
+var endpoint = "https://westeurope.api.cognitive.microsoft.com/";
+var uriBase = endpoint + "vision/v2.0/analyze";
+var webcamStream;
+```
+
+> **Note that the code won't work if you don't put your own subscription key**
 
 ```javascript
 var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
 ```
 
-And we're done! Here is the final scripts.js code.
+For this next step we're going to request the right set of the JSON we get back from Microsoft.
+
+```javascript
+// Request parameters.
+var params = {
+    "visualFeatures": "Objects",
+    "details": "",
+    "language": "en",
+};
+```
+
+Go ahead and create a function 'showResults()' with a parameter 'json' all the way at the bottom. This function is going contain javascript that sends the information you've requested from Microsoft to the 'index.html'.
+
+```javascript
+function showResults(json) {
+
+}
+```
+
+First thing you're going to do in the function 'showResults()' is 'hiding the spinner animation', which shows when the web-app is requesting the information.
+
+```javascript
+document.querySelector('#spinner').classList.add('hidden');
+```
+
+Below that we're going to create a 'var' called 'stringLB' which is going to store the the right object from the JSON we requested. If we had injected the content stored 'stringLB' a HTML element right away the name of the animal would be inside '""'. Thats why we created another 'var' named 'stringLBtrimmed'. Which strips the animal name form its '""'.
+
+```javascript
+var stringLB = JSON.stringify(json.objects[0].object);
+var stringLBtrimmed = stringLB.substr(1, stringLB.length - 2);
+```
+
+Now we're going to insert the content in the HTML element that we gave an ID named '#responseArea' using 'textContent'.
+
+```javascript
+document.querySelector('#responseArea').textContent = stringLBtrimmed;
+```
+To complete the final two lines of the tutorial we're going to give the HTML element 'audio' its rigthful 'src'. Still using the same 'var' we used to display the name of the animal in the '#responseArea'.
+First we're going to select 'audio' by using 'document.getElementById("sourceAudio")'. Now that the audio element is saved in 'var sourceAudio' we can give 'sourceAudio' the source '"./audio/" + stringLBtrimmed + "1.wav"'. Which translates to '"./audio/animalName1.wav"'.
+
+> **Make sure to [download the animal sounds](https://www.google.com "Location of sound files on our Github") from our Github repository.**
+> It's also possible to download animal sounds yourself. Just make sure the sound file is a '.wav' and its named right. For instance 'giraffe1.wav'.
+
+```javascript
+var sourceAudio = document.getElementById("sourceAudio");
+sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav';
+```
+
+```javascript
+function showResults(json) {
+
+    document.querySelector('#spinner').classList.add('hidden');
+
+    var stringLB = JSON.stringify(json.objects[0].object);
+    var stringLBtrimmed = stringLB.substr(1, stringLB.length - 2);
+
+    document.querySelector('#responseArea').textContent = stringLBtrimmed;
+
+    var sourceAudio = document.getElementById("sourceAudio");
+    sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav'
+
+}
+```
+
+And we're done! Here is the final **scripts.js** code.
 
 ```javascript
         // **********************************************
@@ -252,22 +325,14 @@ And we're done! Here is the final scripts.js code.
             // hide spinner image onto the canvas
             document.querySelector('#spinner').classList.add('hidden');
 
-
-            ///////
             var stringLB = JSON.stringify(json.objects[0].object);
             var stringLBtrimmed = stringLB.substr(1, stringLB.length - 2);
-            ///////
 
-
-            // hide spinner image onto the canvas
-            document.querySelector('#spinner').classList.add('hidden');
             // show results in responseArea
             document.querySelector('#responseArea').textContent = stringLBtrimmed;
 
-
             var sourceAudio = document.getElementById("sourceAudio");
-            sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav'
-
+            sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav';
 
         }
 ```
