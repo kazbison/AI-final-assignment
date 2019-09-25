@@ -164,7 +164,7 @@ To complete the final two lines of the tutorial we're going to give the HTML ele
 First we're going to select `audio` by using `document.getElementById("sourceAudio")`. Now that the audio element is saved in `var sourceAudio` we can give `sourceAudio` the source `'./audio/' + stringLBtrimmed + '1.wav'`. Which translates to `'./audio/animalName1.wav'`.
 
 > **Make sure to [download the animal sounds](final/audio/ "Location of sound files on our Github") from our Github repository.**
-> It's also possible to download animal sounds yourself. Just make sure the sound file is a '.wav' and its named right. For instance 'giraffe1.wav'.
+> It's also possible to download animal sounds yourself. Just make sure the sound file is a `.wav` and its named right. For instance `giraffe1.wav`.
 
 ```javascript
 var sourceAudio = document.getElementById("sourceAudio");
