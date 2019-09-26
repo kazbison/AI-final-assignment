@@ -211,6 +211,7 @@ var params = {
 // *** ask permision from user and start webcam, then                        ***
 // *** enable the button to take a snapshot                                  ***
 // *****************************************************************************
+
 function startWebcam() {
     var vid = document.querySelector('video');
     // request cam
