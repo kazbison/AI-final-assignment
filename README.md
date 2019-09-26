@@ -216,29 +216,29 @@ function startWebcam() {
     var vid = document.querySelector('video');
     // request cam
     navigator.mediaDevices.getUserMedia({
-        video: true
-    })
-    .then(stream => {
-        // save stream to variable at top level so it can be stopped lateron
-        webcamStream = stream;
-        // show stream from the webcam on te video element
-        vid.srcObject = stream;
-        // returns a Promise to indicate if the video is playing
-        return vid.play();
-    })
-    .then(() => {
-        // enable the 'take a snap' button
-        var btn = document.querySelector('#takeSnap');
-        btn.disabled = false;
-        // when clicked
-        btn.onclick = e => {
-            takeSnap()
-                .then(blob => {
-                    analyseImage(blob, params, showResults);
-                })
-        };
-    })
-    .catch(e => console.log('error: ' + e));
+            video: true
+        })
+        .then(stream => {
+            // save stream to variable at top level so it can be stopped lateron
+            webcamStream = stream;
+            // show stream from the webcam on te video element
+            vid.srcObject = stream;
+            // returns a Promise to indicate if the video is playing
+            return vid.play();
+        })
+        .then(() => {
+            // enable the 'take a snap' button
+            var btn = document.querySelector('#takeSnap');
+            btn.disabled = false;
+            // when clicked
+            btn.onclick = e => {
+                takeSnap()
+                    .then(blob => {
+                        analyseImage(blob, params, showResults);
+                    })
+            };
+        })
+        .catch(e => console.log('error: ' + e));
 }
 
 // *****************************************************************************
@@ -306,13 +306,13 @@ function analyseImage(image, params, proccessingFunction) {
             },
             processData: false,
             body: image,
-            })
-            // then turn response into json
-            .then(response => response.json())
-            // then go to processingFunction
-            .then(json => proccessingFunction(json))
-            // show alert window if something goes wrong
-            .catch(error => alert(error.message));
+        })
+        // then turn response into json
+        .then(response => response.json())
+        // then go to processingFunction
+        .then(json => proccessingFunction(json))
+        // show alert window if something goes wrong
+        .catch(error => alert(error.message));
 }
 
 // *****************************************************************************
