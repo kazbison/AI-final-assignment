@@ -169,7 +169,7 @@ var sourceAudio = document.getElementById("sourceAudio");
 sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav';
 ```
 
-Now `showResults()`
+If you followed the steps correctly your function `showResults()` will look like this.
 
 ```javascript
 function showResults(json) {
@@ -212,107 +212,107 @@ var params = {
 // *** enable the button to take a snapshot                                  ***
 // *****************************************************************************
 function startWebcam() {
-            var vid = document.querySelector('video');
-            // request cam
-            navigator.mediaDevices.getUserMedia({
-                    video: true
+    var vid = document.querySelector('video');
+    // request cam
+    navigator.mediaDevices.getUserMedia({
+        video: true
+    })
+    .then(stream => {
+        // save stream to variable at top level so it can be stopped lateron
+        webcamStream = stream;
+        // show stream from the webcam on te video element
+        vid.srcObject = stream;
+        // returns a Promise to indicate if the video is playing
+        return vid.play();
+    })
+    .then(() => {
+        // enable the 'take a snap' button
+        var btn = document.querySelector('#takeSnap');
+        btn.disabled = false;
+        // when clicked
+        btn.onclick = e => {
+            takeSnap()
+                .then(blob => {
+                    analyseImage(blob, params, showResults);
                 })
-                .then(stream => {
-                    // save stream to variable at top level so it can be stopped lateron
-                    webcamStream = stream;
-                    // show stream from the webcam on te video element
-                    vid.srcObject = stream;
-                    // returns a Promise to indicate if the video is playing
-                    return vid.play();
-                })
-                .then(() => {
-                    // enable the 'take a snap' button
-                    var btn = document.querySelector('#takeSnap');
-                    btn.disabled = false;
-                    // when clicked
-                    btn.onclick = e => {
-                        takeSnap()
-                            .then(blob => {
-                                analyseImage(blob, params, showResults);
-                            })
-                    };
-                })
-                .catch(e => console.log('error: ' + e));
-        }
+        };
+    })
+    .catch(e => console.log('error: ' + e));
+}
 
-        // *****************************************************************************
-        // *** function takeSnap                                                     ***
-        // *** show snapshotimage from webcam                                        ***
-        // *** convert image to blob                                                 ***
-        // *****************************************************************************
+// *****************************************************************************
+// *** function takeSnap                                                     ***
+// *** show snapshotimage from webcam                                        ***
+// *** convert image to blob                                                 ***
+// *****************************************************************************
 
-        function takeSnap() {
-            // get video element
-            var vid = document.querySelector('video');
-            // get canvas element
-            var canvas = document.querySelector('canvas');
-            // get its context
-            var ctx = canvas.getContext('2d');
-            // set its size to the one of the video
-            canvas.width = vid.videoWidth;
-            canvas.height = vid.videoHeight;
-            // show snapshot on canvas
-            ctx.drawImage(vid, 0, 0);
-            // show spinner image below
-            document.querySelector('#spinner').classList.remove('hidden');
-            return new Promise((res, rej) => {
-                // request a Blob from the canvas
-                canvas.toBlob(res, 'image/jpeg');
-            });
-        }
+function takeSnap() {
 
-        // *****************************************************************************
-        // *** function stopWebcam                                                   ***
-        // *** stop webcam                                                           ***
-        // *** disable snapshot button                                               ***
-        // *****************************************************************************
+    // get video element
+    var vid = document.querySelector('video');
+    // get canvas element
+    var canvas = document.querySelector('canvas');
+    // get its context
+    var ctx = canvas.getContext('2d');
+    // set its size to the one of the video
+    canvas.width = vid.videoWidth;
+    canvas.height = vid.videoHeight;
+    // show snapshot on canvas
+    ctx.drawImage(vid, 0, 0);
+    // show spinner image below
+    document.querySelector('#spinner').classList.remove('hidden');
+    return new Promise((res, rej) => {
+        // request a Blob from the canvas
+        canvas.toBlob(res, 'image/jpeg');
+    });
+}
 
-        function stopWebcam() {
-            var vid = document.querySelector('video');
-            vid.srcObject.getTracks().forEach((track) => {
-                track.stop();
-            });
-            // disable snapshot button
-            document.querySelector('#takeSnap').disabled = true;
-        }
+// *****************************************************************************
+// *** function stopWebcam                                                   ***
+// *** stop webcam                                                           ***
+// *** disable snapshot button                                               ***
+// *****************************************************************************
 
+function stopWebcam() {
+    var vid = document.querySelector('video');
+    vid.srcObject.getTracks().forEach((track) => {
+        track.stop();
+    });
+    // disable snapshot button
+    document.querySelector('#takeSnap').disabled = true;
+}
 
-        // *****************************************************************************
-        // *** function analyseImage                                                 ***
-        // *** analyse image using cognitive services of Microsoft                   ***
-        // *** img - image to analyse                                                ***
-        // *** params - object containing params to send                             ***
-        // *** processingFunction - name of function to call to process the response ***
-        // *****************************************************************************
+// *****************************************************************************
+// *** function analyseImage                                                 ***
+// *** analyse image using cognitive services of Microsoft                   ***
+// *** img - image to analyse                                                ***
+// *** params - object containing params to send                             ***
+// *** processingFunction - name of function to call to process the response ***
+// *****************************************************************************
 
-        function analyseImage(image, params, proccessingFunction) {
+function analyseImage(image, params, proccessingFunction) {
 
-            // create API url by adding params
-            var paramString = Object.entries(params).map(([key, val]) => `${key}=${val}`).join('&');
-            var urlWithParams = uriBase + "?" + paramString;
+    // create API url by adding params
+    var paramString = Object.entries(params).map(([key, val]) => `${key}=${val}`).join('&');
+    var urlWithParams = uriBase + "?" + paramString;
 
-            // do API call
-            fetch(urlWithParams, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/octet-stream",
-                        "Ocp-Apim-Subscription-Key": subscriptionKey
-                    },
-                    processData: false,
-                    body: image,
-                })
-                // then turn response into json
-                .then(response => response.json())
-                // then go to processingFunction
-                .then(json => proccessingFunction(json))
-                // show alert window if something goes wrong
-                .catch(error => alert(error.message));
-        }
+    // do API call
+    fetch(urlWithParams, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/octet-stream",
+                "Ocp-Apim-Subscription-Key": subscriptionKey
+            },
+            processData: false,
+            body: image,
+            })
+            // then turn response into json
+            .then(response => response.json())
+            // then go to processingFunction
+            .then(json => proccessingFunction(json))
+            // show alert window if something goes wrong
+            .catch(error => alert(error.message));
+}
 
 // *****************************************************************************
 // *** function showResults                                                  ***
