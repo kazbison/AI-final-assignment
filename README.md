@@ -402,3 +402,5 @@ function showResults(json) {
 
 }
 ```
+
+![Desktop version screenshot of .wav!](screenshot-wav-desktop.png "Desktop version screenshot of .wav!")
