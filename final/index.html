@@ -2,24 +2,25 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>.wav!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
 
-    <h1>Take a snapshot with webcam to be analyzed</h1>
-    <label>Take a snapshot of a animal</label>
+    <h1>.wav!</h1>
+    <video id="video" controls autoplay></video>
     <div>
         <button onclick="startWebcam();">Start WebCam</button>
         <button id="takeSnap" disabled>Take Snapshot</button>
         <button onclick="stopWebcam();">Stop WebCam</button>
     </div>
-    <video width=325 height=225 id="video" controls autoplay></video>
 
     <div>
-        <p>Image:</p>
+        <h2>Snapshot of camera:</h2>
         <canvas id="sourceImage"></canvas>
         <img id="spinner" src="loading.gif" alt="loading" class="hidden">
         <pre id="responseArea"></pre>
