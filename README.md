@@ -11,24 +11,25 @@ We're going to start by creating an index.html file in a new directory. The proj
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>.wav!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
 
-    <h1>Take a snapshot with webcam to be analyzed</h1>
-    <label>Take a snapshot of a animal</label>
+    <h1>.wav!</h1>
+    <video id="video" controls autoplay></video>
     <div>
         <button onclick="startWebcam();">Start WebCam</button>
         <button id="takeSnap" disabled>Take Snapshot</button>
         <button onclick="stopWebcam();">Stop WebCam</button>
     </div>
-    <video width=325 height=225 id="video" controls autoplay></video>
 
     <div>
-        <p>Image:</p>
+        <h2>Snapshot of camera:</h2>
         <canvas id="sourceImage"></canvas>
         <img id="spinner" src="loading.gif" alt="loading" class="hidden">
         <pre id="responseArea"></pre>
@@ -54,23 +55,47 @@ We're going to start by creating an index.html file in a new directory. The proj
 }
 
 body {
+    background: #FACF9F;
+    color: #000;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    padding: 0.5em;
-    max-width: 40em;
-    margin: 0 auto;
+    padding: 0.5em 0.5em 4em 0.5em;
+}
+
+h1 {
+    color: #0A4D58;
+    font-size: 1.75em;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.75em;
+}
+
+h2 {
+    color: #0A4D58;
+    font-size: 1.5em;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.5em;
+    margin-bottom: 1em;
 }
 
 label {
     display: block;
 }
 
+body div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 input,
 button {
+    margin: .5em 0;
     padding: .5em;
-    margin: .2em;
     border-radius: .3em;
+    width: 30%;
 }
 
 input {
@@ -79,28 +104,68 @@ input {
 }
 
 button {
-    font-size: .8em;
-    background: hsl(200, 30%, 50%);
+    font-size: 1em;
+    background: #0A4D58;
     color: white;
     border: none;
 }
 
 button:disabled {
-    background: hsl(200, 30%, 70%);
-    color: hsl(200, 30%, 90%);
+    opacity: .5;
+}
+
+#video {
+    width: 100%;
 }
 
 img {
-    max-width: 100%;
+    width: 100%;
     display: block;
 }
 
 canvas {
-    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    width: 100%;
 }
 
 .hidden {
     display: none;
+}
+
+pre {
+    color: #0A4D58;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5em;
+    font-weight: 400;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 1em;
+}
+
+audio {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 31em) {
+
+    audio {
+        max-width: 30em;
+        margin: 0 auto;
+    }
+
+}
+
+@media (min-width: 60em) {
+
+    body {
+        margin: 0 auto;
+        max-width: 60em;
+        padding-bottom: 6em;
+    }
+
 }
 ```
 
