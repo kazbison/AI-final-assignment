@@ -108,9 +108,11 @@ Now that we have the HTML and CSS set up, you can make scripts.js and we'll cont
 
 ## script.js
 
-To start of we need to link the endpoint to the right direction to get the right set of JSON back from Microsoft Azure.
+This webapp is based on code from [Sonja Rouwhorst](tutorial%20by%20sonja%20rouwhorst/voorbeeld-webcam.html/ "The code this webapp is based upon"). Go ahead and take a look, if you want to, so you get to know which code we've replaced with the code we're showing you in this manual.
 
-> **Note that the code won't work if you don't put your own subscription key.** You can get a subscription key right [here](https://linktomicrosoft.com/ "Link to Microsoft Azure to get a subscription key").
+To start of we need to link to the right to get the right set of JSON back from Microsoft Azure.
+
+> **Note that the code won't work if you don't put your own subscription key.** [Link to Microsoft Azure](https://azure.microsoft.com/ "Link to Microsoft Azure").
 
 ```javascript
 var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
@@ -167,6 +169,8 @@ var sourceAudio = document.getElementById("sourceAudio");
 sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav';
 ```
 
+Now `showResults()`
+
 ```javascript
 function showResults(json) {
 
@@ -186,28 +190,28 @@ function showResults(json) {
 And we're done! Here is the final **scripts.js** code.
 
 ```javascript
-        // **********************************************
-        // *** Update or verify the following values. ***
-        // **********************************************
+// **********************************************
+// *** Update or verify the following values. ***
+// **********************************************
 
-        var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
-        var endpoint = "https://westeurope.api.cognitive.microsoft.com/";
-        var uriBase = endpoint + "vision/v2.0/analyze";
-        var webcamStream;
+var subscriptionKey = "PUT YOUR SUBSCRIPTION KEY HERE";
+var endpoint = "https://westeurope.api.cognitive.microsoft.com/";
+var uriBase = endpoint + "vision/v2.0/analyze";
+var webcamStream;
 
-        // Request parameters.
-        var params = {
-            "visualFeatures": "Objects",
-            "details": "",
-            "language": "en",
-        };
+// Request parameters.
+var params = {
+    "visualFeatures": "Objects",
+    "details": "",
+    "language": "en",
+};
 
-        // ***********************************************************************
-        // *** function startWebcam                                           ***
-        // *** ask permision from user and start webcam, then                 ***
-        // *** enable the button to take a snapshot                           ***
-        // ***********************************************************************
-        function startWebcam() {
+// *****************************************************************************
+// *** function startWebcam                                                  ***
+// *** ask permision from user and start webcam, then                        ***
+// *** enable the button to take a snapshot                                  ***
+// *****************************************************************************
+function startWebcam() {
             var vid = document.querySelector('video');
             // request cam
             navigator.mediaDevices.getUserMedia({
@@ -236,11 +240,11 @@ And we're done! Here is the final **scripts.js** code.
                 .catch(e => console.log('error: ' + e));
         }
 
-        // ***********************************************************************
-        // *** function takeSnap                                              ***
-        // *** show snapshotimage from webcam                                 ***
-        // *** convert image to blob                                          ***
-        // ***********************************************************************
+        // *****************************************************************************
+        // *** function takeSnap                                                     ***
+        // *** show snapshotimage from webcam                                        ***
+        // *** convert image to blob                                                 ***
+        // *****************************************************************************
 
         function takeSnap() {
             // get video element
@@ -262,11 +266,11 @@ And we're done! Here is the final **scripts.js** code.
             });
         }
 
-        // ***********************************************************************
-        // *** function stopWebcam                                             ***
-        // *** stop webcam                                                     ***
-        // *** disable snapshot button                                         ***
-        // ***********************************************************************
+        // *****************************************************************************
+        // *** function stopWebcam                                                   ***
+        // *** stop webcam                                                           ***
+        // *** disable snapshot button                                               ***
+        // *****************************************************************************
 
         function stopWebcam() {
             var vid = document.querySelector('video');
@@ -278,13 +282,13 @@ And we're done! Here is the final **scripts.js** code.
         }
 
 
-        // ***********************************************************************
-        // *** function analyseImage                                           ***
-        // *** analyse image using cognitive services of Microsoft             ***
-        // *** img - image to analyse                                          ***
-        // *** params - object containing params to send                       ***
+        // *****************************************************************************
+        // *** function analyseImage                                                 ***
+        // *** analyse image using cognitive services of Microsoft                   ***
+        // *** img - image to analyse                                                ***
+        // *** params - object containing params to send                             ***
         // *** processingFunction - name of function to call to process the response ***
-        // ***********************************************************************
+        // *****************************************************************************
 
         function analyseImage(image, params, proccessingFunction) {
 
@@ -310,25 +314,25 @@ And we're done! Here is the final **scripts.js** code.
                 .catch(error => alert(error.message));
         }
 
-        // ***********************************************************************
-        // *** function showResults                                            ***
-        // *** show results found by AI service                                ***
-        // *** json - json response from AI                                    ***
-        // ***********************************************************************
+// *****************************************************************************
+// *** function showResults                                                  ***
+// *** show results found by AI service                                      ***
+// *** json - json response from AI                                          ***
+// *****************************************************************************
 
-        function showResults(json) {
+function showResults(json) {
 
-            // hide spinner image onto the canvas
-            document.querySelector('#spinner').classList.add('hidden');
+    // hide spinner image onto the canvas
+    document.querySelector('#spinner').classList.add('hidden');
 
-            var stringLB = JSON.stringify(json.objects[0].object);
-            var stringLBtrimmed = stringLB.substr(1, stringLB.length - 2);
+    var stringLB = JSON.stringify(json.objects[0].object);
+    var stringLBtrimmed = stringLB.substr(1, stringLB.length - 2);
 
-            // show results in responseArea
-            document.querySelector('#responseArea').textContent = stringLBtrimmed;
+    // show results in responseArea
+    document.querySelector('#responseArea').textContent = stringLBtrimmed;
 
-            var sourceAudio = document.getElementById("sourceAudio");
-            sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav';
+    var sourceAudio = document.getElementById("sourceAudio");
+    sourceAudio.src = './audio/' + stringLBtrimmed + '1.wav';
 
-        }
+}
 ```
