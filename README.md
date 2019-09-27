@@ -8,7 +8,7 @@
 ## Prerequisites
 
 * Basic knowledge of HTML and CSS
-* Basic knowledge of JavaScript syntax and datatypes
+* Basic knowledge of JavaScript
 * Basic knowledge of working with JSON and JavaScript objects
 
 It will look like this:
