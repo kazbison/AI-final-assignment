@@ -1,5 +1,22 @@
 # How to Build .wav!
 
+* [View demo .wav!](final/index.html/ "View demo .wav!")
+* [Source code](final/ "Source code")
+
+> **Note that te demo doesn't work. Below we'll explain why**
+
+## Prerequisites
+
+* Basic knowledge of HTML and CSS
+* Basic knowledge of JavaScript syntax and datatypes
+* Basic knowledge of working with JSON and JavaScript objects
+
+It will look like this:
+
+![Desktop version screenshot of .wav!](screenshot-wav-desktop.png "Desktop version screenshot of .wav!")
+
+Let's get started.
+
 ## Setting Up
 
 We're going to start by creating an index.html file in a new directory. The project will consist of index.html, style.css, and scripts.js at the end. This HTML and CSS file are complete and will not change. We'll be using JavaScript to add everything from here out.
@@ -403,4 +420,11 @@ function showResults(json) {
 }
 ```
 
+Here is what the final product looks like!
+
 ![Desktop version screenshot of .wav!](screenshot-wav-desktop.png "Desktop version screenshot of .wav!")
+
+Again, here is a link to the demo and the source code.
+
+* [View demo .wav!](final/index.html/ "View demo .wav!")
+* [Source code](final/ "Source code")
