@@ -3,7 +3,7 @@
 * [View demo .wav!](final/index.html/ "View demo .wav!")
 * [Source code](final/ "Source code")
 
-> **Note that te demo doesn't work. Below we'll explain why**
+> **Note that the demo doesn't work. Below we'll explain why**
 
 ## Prerequisites
 
