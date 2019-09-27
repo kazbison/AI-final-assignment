@@ -1,6 +1,6 @@
 # How to Build .wav!
 
-* [View demo .wav!](final/index.html/ "View demo .wav!")
+* [View demo .wav!](https://kazbison.github.io/AI-final-assignment/final/index.html "View demo .wav!")
 * [Source code](final/ "Source code")
 
 > **Note that the demo doesn't work. Below we'll explain why**
@@ -426,5 +426,5 @@ Here is what the final product looks like!
 
 Again, here is a link to the demo and the source code.
 
-* [View demo .wav!](final/index.html/ "View demo .wav!")
+* [View demo .wav!](https://kazbison.github.io/AI-final-assignment/final/index.html "View demo .wav!")
 * [Source code](final/ "Source code")
